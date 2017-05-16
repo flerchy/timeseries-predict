@@ -8,6 +8,9 @@ Time series prediction
 Result:
 {% if file_name %}
 {{ file|linebreaks }}
+<img src="{{pic_name}}_origin.png"/>
+<img src="{{pic_name}}_linreg.png"/>
+<img src="{{pic_name}}_isoreg.png"/>
 {% else %}
 <p> No filename! </p>
 {% endif %}

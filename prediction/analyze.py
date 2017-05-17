@@ -12,7 +12,6 @@ import matplotlib.pyplot as plt
 import os
 from os.path import basename
 
-
 def draw_plot(filename):
     ds = pd.read_csv(filename, index_col=['Date'], parse_dates=['Date'])
     ds.as_matrix()
@@ -32,8 +31,8 @@ def linreg(filename):
 
     X_predict = X  # put the dates of which you want to predict kwh here
     y_predict = model.predict(X_predict.reshape(len(X_predict), 1))
-    fig = plt.figure()
-    plt.plot(y[:len(y)])
+    fig = plt.figure(figsize=(12, 6))
+    plt.plot(y)
     plt.plot(y_predict)
     fig.savefig("files/" + str(os.path.splitext(os.path.basename(filename))[0]) + "_linreg.png")
 
@@ -50,7 +49,7 @@ def isoreg(filename):
 
     X_predict = ds["d"]  # put the dates of which you want to predict kwh here
     y_predict = model.predict(X_predict)
-    fig = plt.figure()
-    plt.plot(y[:len(y)])
+    fig = plt.figure(figsize=(12, 6))
+    plt.plot(y)
     plt.plot(y_predict)
     fig.savefig("files/" + str(os.path.splitext(os.path.basename(filename))[0]) + "_isoreg.png")

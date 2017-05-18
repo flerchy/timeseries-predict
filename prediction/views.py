@@ -15,6 +15,7 @@ def result(request, filename):
     analyze.draw_plot("files/" + filename)
     analyze.linreg("files/" + filename)
     analyze.isoreg("files/" + filename)
+    analyze.destreereg("files/" + filename)
     template = loader.get_template('prediction/result.html')
     print filename
     f = open(str("files/" + filename), "r")
@@ -33,7 +34,6 @@ def index(request):
             newdoc.save()
             # Redirect to the document list after POST
 
-            
             return HttpResponseRedirect(request.META['HTTP_REFERER'])
     else:
         form = DocumentForm() # A empty, unbound form
@@ -43,3 +43,23 @@ def index(request):
     template = loader.get_template('prediction/index.html')
     return render( request, 'prediction/index.html', {'documents': documents, 'form' : form})
 
+def custom404(request, filename):
+    template = loader.get_template('prediction/error.html')
+    print filename
+    f = open(str("files/" + filename), "r")
+    str_f = f.read()
+    print str_f
+    f.close()
+    filename = os.path.splitext(os.path.basename(filename))[0]
+    context = {'file_name': filename}    
+    return HttpResponse(template.render(context, request))
+
+def about(request):
+    template = loader.get_template('prediction/about.html')
+    context={}
+    return HttpResponse(template.render(context, request))
+
+def instruction(request):
+    template = loader.get_template('prediction/instruction.html')
+    context={}
+    return HttpResponse(template.render(context, request))

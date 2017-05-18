@@ -1,24 +1,66 @@
 <html>
 <head>
+<link rel="stylesheet" href="../../../files/css/bootstrap.css">
+<link rel="stylesheet" href="../../../files/css/bootstrap-theme.css">
 <title>
 Time series prediction
 </title>
 </head>
 <body>
-Result:
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/prediction/">Прогнозирование временных рядов</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/prediction/">Главная</a></li>
+            <li><a href="/prediction/instruction/">Инструкция</a></li>
+            <li><a href="/prediction/about/">Об авторе</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+</nav>
+<div class="container">
 {% if file_name %}
-<img class="mySlides" src="{{pic_name}}_origin.png"/>
-<img class="mySlides" src="{{pic_name}}_linreg.png"/>
-<img class="mySlides" src="{{pic_name}}_isoreg.png"/>
-<button class="w3-button w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-<button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>
+<div class="row">
+<div class="col-md-1">
+</div>
+<div class="col-md-1">
+<button class="btn btn-lg btn-primary" onclick=goBack()> Назад </button>
+</div>
+</div>
+<div class="row">
+<img src="{{pic_name}}_origin.png"/>
+<div align="center" padding-bottom="25px">
+<button class="w3-button w3-display-left btn-lg btn" onclick="plusDivs(-1)">&#10094;</button>
+<button class="w3-button w3-display-right btn-lg btn" onclick="plusDivs(+1)">&#10095;</button>
+<div class="mySlides" align="center"><p><img  src="{{pic_name}}_linreg.png"/> </p>  <p align="center"> <h2> Linear regression </h2> <br><br></p> <p>  </div>
+<div class="mySlides" align="center"><p> <img src="{{pic_name}}_isoreg.png"/> </p> <p align="center"> <h2> Isotonic regression </h2> <br><br></p> <p>  </div>
+<div class="mySlides" align="center"><p> <img src="{{pic_name}}_destreereg.png"/> </p> <h2> Desision tree regression </h2> <h3> Оранжевая - максимальная глубина 2, зелёная - максимальная глубина 5 </h3>  </div>
+</div >
 {% else %}
 <p> No filename! </p>
 {% endif %}
+</div>
+<p></p>
+<p></p>
+</div>
+</body>
+
 <script>
 var slideIndex = 1;
 showDivs(slideIndex);
 
+function goBack() {
+    window.history.back()
+}
 function plusDivs(n) {
    showDivs(slideIndex += n);
 }
@@ -34,5 +76,4 @@ function showDivs(n) {
     x[slideIndex-1].style.display = "block"; 
  }
 </script>
-</body>
 </html>
